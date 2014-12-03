@@ -16,7 +16,9 @@
 
 
 import sys
-from subprocess import call
+from subprocess import Popen
+import os
+
 
 def read_input_suffix_array(filename):
     with open(filename) as f:
@@ -35,21 +37,14 @@ def construct_bw_transform(suffix_array, text):
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print "USAGE: python text_to_bw.py [Text] [Suffix Array] > [output]"
-        print "\t\tOR\t\t"
         print "USAGE: python text_to_bw.py [Text] > [output]"
         sys.exit(0)
 
-    if len(sys.argv) == 2:
-        call(["./radixSA", sys.argv[1], "suffix_array.txt"])
-
-    print
-
-    sys.argv.append("suffix_array.txt")
+    with open(os.devnull, 'wb') as DEVNULL:
+        Popen(["./radixSA", sys.argv[1], "suffix_array.txt"], stdout=DEVNULL)
 
     text = read_input_text(sys.argv[1])
-    suffix_array = read_input_suffix_array(sys.argv[2])
+    suffix_array = read_input_suffix_array("suffix_array.txt")
     construct_bw_transform(suffix_array, text)
 
     print
-
