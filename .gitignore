@@ -55,3 +55,6 @@ target/
 
 # PyCharm project files
 .idea/
+
+# radixSA binary
+radixSA
