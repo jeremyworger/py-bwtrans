@@ -41,7 +41,7 @@ if __name__ == "__main__":
         sys.exit(0)
 
     with open(os.devnull, 'wb') as DEVNULL:
-        Popen(["./radixSA", sys.argv[1], "suffix_array.txt"], stdout=DEVNULL)
+        Popen(["./radixSA", sys.argv[1], "suffix_array.txt"], stdout=DEVNULL).wait()
 
     text = read_input_text(sys.argv[1])
     suffix_array = read_input_suffix_array("suffix_array.txt")
